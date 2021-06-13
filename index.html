@@ -257,13 +257,12 @@
                     if (angle < 0 && angle > -180) {
                         rotate = angle + startAngle;
                         box.style.transform = `rotate(${rotate}deg)`;
+                        progress = rotate + 5;
                         if (box == box1 && progressBar == progressBar1) {
-                            progress = rotate + 5;
                             progressBar.style.boxShadow = `inset 0 -${progress}px lightcoral`;
                         }
                         if (box == box2 && progressBar == progressBar2 ||
                             progressBar == progressBar4) {
-                            progress = rotate + 5;
                             progressBar.style.boxShadow = `inset 0 -${progress}px cyan`;
                             // title animation
                             document.getElementById("title").style.backgroundImage = `linear-gradient(90deg, cyan ${progress-100}%, lightsalmon)`
@@ -283,8 +282,8 @@
 
         run(box1, progressBar1);
         run(box2, progressBar2);
-        run(box3, progressBar3);
         run(box2, progressBar4);
+        run(box3, progressBar3);
     </script>
 </body>
 
