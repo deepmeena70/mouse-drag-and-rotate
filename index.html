@@ -111,11 +111,7 @@
             let boxHeight = boxData.height;
             let l = boxData.left;
             let t = boxData.top;
-            // offset
-            let oX = mX - l;
-            let oY = mY - t;
-            //arc points
-            let x, y;
+
             // rotation
             let rotate = 0;
             let radians = 180 / Math.PI;
@@ -123,9 +119,9 @@
                 x: l + (boxWidth / 2),
                 y: t + (boxHeight / 2)
             };
-
-            x = mX - center.x;
-            y = mY - center.y;
+            // arc points
+            let x = mX - center.x;
+            let y = mY - center.y;
             let angle = Math.floor(Math.atan2(y, x) * radians);
             let startAngle = 180;
 
@@ -135,7 +131,7 @@
                     rotate = angle + startAngle;
                     box.style.transform = `rotate(${rotate}deg)`;
                     progress = rotate - 15;
-                    document.getElementById("progress-bar").style.boxShadow = `inset 0 -${progress}px yellow`;
+                    document.getElementById("progress-bar").style.boxShadow = `inset 0 -${progress}px rgba(240, 255, 0, 0.9)`;
                 }
 
             }
