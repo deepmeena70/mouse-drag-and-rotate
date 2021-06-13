@@ -30,7 +30,7 @@
         .box {
             width: 200px;
             height: 200px;
-            background-color: red;
+            background-color: transparent;
             position: absolute;
             left: 25%;
             top: 25%;
@@ -47,7 +47,7 @@
             width: 160px;
             height: 160px;
             border-radius: 50%;
-            border: 5px solid yellow;
+            box-shadow: 0 0 10px yellow, inset 0 0 10px 5px yellow;
             position: absolute;
             top: 50%;
             left: 50%;
@@ -57,21 +57,31 @@
         .dot {
             width: 10px;
             height: 10px;
-            background-color: red;
-            box-shadow: 0 0 200px yellow;
+            box-shadow: inset 0 0 7px 1px yellow;
             position: absolute;
-            top: 120px;
-            left: 40px;
+            top: 80px;
+            left: 20px;
             border-radius: 50%;
+        }
+        
+        .progress-bar {
+            background-color: rgba(255, 255, 255, 0.4);
+            height: 180px;
+            width: 40px;
+            position: absolute;
+            bottom: 100px;
+            left: 40px;
+            clip-path: polygon(0 0, 0% 100%, 100% 0);
         }
     </style>
 </head>
 
 <body>
     <div class="container">
+        <div id="progress-bar" class="progress-bar"></div>
         <div id="box" class="box">
             <div class="circle">
-                <div class="dot"></div>
+                <div id="dot" class="dot"></div>
             </div>
         </div>
     </div>
@@ -104,6 +114,7 @@
             // offset
             let oX = mX - l;
             let oY = mY - t;
+            //arc points
             let x, y;
             // rotation
             let rotate = 0;
@@ -112,16 +123,23 @@
                 x: l + (boxWidth / 2),
                 y: t + (boxHeight / 2)
             };
+
             x = mX - center.x;
             y = mY - center.y;
-            let angle = Math.atan2(y, x) * radians;
+            let angle = Math.floor(Math.atan2(y, x) * radians);
+            let startAngle = 180;
 
             // active status
             if (active) {
-                rotate = angle;
-                box.style.transform = `rotate(${rotate}deg)`;
+                if (angle < 20 && angle > -180) {
+                    rotate = angle + startAngle;
+                    box.style.transform = `rotate(${rotate}deg)`;
+                    progress = rotate - 15;
+                    document.getElementById("progress-bar").style.boxShadow = `inset 0 -${progress}px yellow`;
+                }
+
             }
-            document.querySelector(".data").innerHTML = `Data : ${angle}`
+            document.querySelector(".data").innerHTML = `Data : ${angle}, ${progress}`
         });
     </script>
 </body>
