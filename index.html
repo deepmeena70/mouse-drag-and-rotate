@@ -164,6 +164,7 @@
         }
         
         #title {
+            background-image: linear-gradient(90deg, white, white);
             background-clip: text;
             -webkit-background-clip: text;
             text-transform: capitalize;
@@ -264,7 +265,7 @@
                             progressBar == progressBar4) {
                             progress = rotate + 5;
                             progressBar.style.boxShadow = `inset 0 -${progress}px cyan`;
-                            document.getElementById("title").style.backgroundImage = `linear-gradient(90deg, cyan ${progress-150}%, white)`
+                            document.getElementById("title").style.backgroundImage = `linear-gradient(90deg, cyan ${progress-100}%, lightsalmon)`
                         }
 
                         if (box == box3 && progressBar == progressBar3) {
